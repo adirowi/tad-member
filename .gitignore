@@ -1,0 +1,13 @@
+# Cloudflare Wrangler state
+.wrangler/
+
+# Dependency directories
+node_modules/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Local environment configuration
+.env
+*.local

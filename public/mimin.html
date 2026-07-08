@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mimin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container-wide">
+    <div class="mimin-header">
+      <div>
+        <h1>Mimin Portal</h1>
+        <p style="color: var(--text-muted); margin-top: 0.25rem;">Admin Management & Bulk Import</p>
+      </div>
+      <a href="/" class="btn btn-secondary" style="width: auto;">Back to Public Portal</a>
+    </div>
+
+    <div id="alert-error" class="alert alert-danger"></div>
+    <div id="alert-success" class="alert alert-success"></div>
+
+    <div class="grid-2">
+      <!-- Left Column: Add / Import Form -->
+      <div>
+        <!-- Add Single Record -->
+        <div style="margin-bottom: 2.5rem;">
+          <h2 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--text-main);">Add Record Manually</h2>
+          <form id="add-record-form">
+            <div class="form-group">
+              <label for="new-nickname">Nickname</label>
+              <input type="text" id="new-nickname" required placeholder="e.g. johndoe">
+            </div>
+            <div class="form-group">
+              <label for="new-phone">Phone Number</label>
+              <input type="tel" id="new-phone" required placeholder="e.g. 08123456789">
+            </div>
+            <div class="form-group">
+              <label for="new-url">Google Drive PDF URL</label>
+              <input type="url" id="new-url" required placeholder="https://drive.google.com/file/d/.../view">
+            </div>
+            <button type="submit" id="add-btn" class="btn btn-primary">
+              <span class="spinner" id="add-spinner"></span>
+              Add Record
+            </button>
+          </form>
+        </div>
+
+        <!-- Import CSV -->
+        <div>
+          <h2 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--text-main);">Bulk Import via CSV</h2>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">
+            Format: CSV with headers <code>nickname</code>, <code>phone_number</code>, <code>pdf_url</code>
+          </p>
+          <div id="csv-dropzone" class="csv-drop-zone">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+            </svg>
+            <p>Drag & drop your CSV file here or <span style="color: var(--primary); font-weight: 600;">browse</span></p>
+            <input type="file" id="csv-file-input" accept=".csv" style="display: none;">
+          </div>
+          <button id="import-btn" class="btn btn-secondary" disabled>
+            <span class="spinner" id="import-spinner" style="border-top-color: var(--text-main);"></span>
+            Import CSV Data
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Live Table view -->
+      <div>
+        <h2 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--text-main);">Active Records</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Nickname</th>
+                <th>Phone Number</th>
+                <th>Google Drive Link</th>
+                <th style="width: 80px;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="records-tbody">
+              <!-- Dynamically populated -->
+              <tr>
+                <td colspan="4" style="text-align: center; color: var(--text-muted);">Loading records...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="mimin.js"></script>
+</body>
+</html>
